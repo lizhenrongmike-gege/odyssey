@@ -123,10 +123,11 @@ const { navData, rightMenu } = Astro.props;
     margin-right: 1rem;
     color: inherit;
     opacity: 0.72;
-    transition: opacity linear 150ms;
+    transition: opacity linear 150ms, color linear 150ms;
   }
   nav ul li a:hover {
     opacity: 1;
+    color: var(--theme-accent);
   }
   @media(max-width: 600px) {
     #menuButton {

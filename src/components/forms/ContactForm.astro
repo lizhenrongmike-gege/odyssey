@@ -1,26 +1,52 @@
 ---
 import { Button, FormInput, FormSelect, FormTextarea } from '@components/odyssey-theme';
+import settings from '../../config/settings.js';
 
-const selectOptions = [
-  "Google Search",
-  "Social Media",
-  "Email",
-]
+const { business, url } = settings;
 
+const selectOptions = ['Google Search', 'Social Media', 'Referral', 'Other'];
 ---
 
-<form name="Contact Form" method="POST" action="/contact-thank-you">
-  <FormInput type="text" label="Name" name="Name" placeholder="John Doe" />
-  <FormInput type="email" label="Email" name="Email" placeholder="hello@example.com" />
-  <FormSelect label="How Did You Hear About Us?" options={selectOptions} />
-  <FormTextarea label="Message" name="Message" placeholder="Your message here..." />
-  <Button>Submit</Button>
+<form name="Contact Form" method="POST" action={business.contactFormEndpoint}>
+	<!-- Form-service fields (Formspree convention): subject line + post-submit redirect. -->
+	<input type="hidden" name="_subject" value="New inquiry from cilomediastudio.com" />
+	<input type="hidden" name="_next" value={`${url}/contact-thank-you`} />
+	<!-- Honeypot to reduce spam; real users never see or fill this. -->
+	<input
+		type="text"
+		name="_gotcha"
+		style="display:none !important"
+		tabindex="-1"
+		autocomplete="off"
+		aria-hidden="true"
+	/>
+
+	<FormInput type="text" label="Name" name="name" placeholder="Jane Doe" required />
+	<FormInput
+		type="email"
+		label="Email"
+		name="email"
+		placeholder="you@example.com"
+		required
+	/>
+	<FormSelect
+		label="How did you hear about us?"
+		name="referral"
+		options={selectOptions}
+	/>
+	<FormTextarea
+		label="Message"
+		name="message"
+		placeholder="Tell us a bit about your brand and what you're trying to grow..."
+		required
+	/>
+	<Button>Send message</Button>
 </form>
 
 <style>
-  form {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
+	form {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
 </style>

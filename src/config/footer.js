@@ -1,54 +1,19 @@
-export const footerSocials = [
-  {
-    name: 'Twitter',
-    url: 'https://twitter.com/jaydanurwin',
-    icon: "mdi:twitter",
-  },
-  {
-    name: 'Youtube',
-    url: 'https://youtube.com/@jaydanurwin',
-    icon: "mdi:youtube",
-  },
-  {
-    name: 'Github',
-    url: 'https://github.com/jaydanurwin',
-    icon: "mdi:github",
-  },
-  {
-    name: 'Discord',
-    url: 'https://astro.build/chat',
-    icon: "ic:baseline-discord",
-  },
-]
+// No real social accounts are wired yet. Add real Cilo Media Studio profiles
+// (e.g. Instagram, LinkedIn) here when available — do not add placeholder or
+// broken links. Each item: { name, url, icon } using an mdi/ic iconify name.
+export const footerSocials = [];
 
 export const footerLists = [
-	{
-		title: 'Landing Pages',
-		items: [
-			{
-				title: 'Landing Page 1',
-				slug: '/landing-pages/landing-1',
-			},
-			{
-				title: 'Landing Page 2',
-				slug: '/landing-pages/landing-2',
-			},
-      // {
-			// 	title: 'Landing Page 3',
-			// 	slug: '/landing-pages/landing-3',
-			// },
-		],
-	},
 	{
 		title: 'Company',
 		items: [
 			{
-				title: 'About',
-				slug: '/company/about',
+				title: 'Home',
+				slug: '/',
 			},
 			{
-				title: 'Blog',
-				slug: '/blog',
+				title: 'About',
+				slug: '/company/about',
 			},
 			{
 				title: 'Contact',
@@ -57,24 +22,20 @@ export const footerLists = [
 		],
 	},
 	{
-		title: 'Theme',
+		title: 'Legal',
 		items: [
 			{
-				title: 'Get Started',
-				slug: '/theme/get-started',
+				title: 'Privacy Policy',
+				slug: '/privacy',
 			},
 			{
-				title: 'Style Guide',
-				slug: '/theme/style-guide',
+				title: 'Terms of Service',
+				slug: '/terms',
 			},
-      {
-        title: 'Theme Setup',
-        slug: '/theme/theme-setup',
-      },
-      {
-        title: 'Customizing Odyssey',
-        slug: '/theme/customizing-odyssey',
-      }
+			{
+				title: 'Data Deletion',
+				slug: '/data-deletion',
+			},
 		],
 	},
 ];

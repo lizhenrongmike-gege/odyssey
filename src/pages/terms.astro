@@ -1,0 +1,109 @@
+---
+import { TextSection } from '@components/odyssey-theme';
+import Layout from '../layouts/Page.astro';
+import settings from '../config/settings.js';
+
+const { business } = settings;
+const lastUpdated = 'June 20, 2026';
+
+const seo = {
+	title: 'Terms of Service | Cilo Media Studio',
+	description:
+		'The terms and conditions that govern use of the Cilo Media Studio website and services.',
+};
+---
+
+<Layout seo={seo}>
+	<TextSection narrow>
+		<h1>Terms of Service</h1>
+		<p><em>Last updated: {lastUpdated}</em></p>
+
+		<p>
+			These Terms of Service ("Terms") govern your use of the website operated by
+			{business.legalName} ("Cilo Media Studio", "we", "us", or "our") and any
+			information or services made available through it. By accessing or using
+			this website, you agree to these Terms. If you do not agree, please do not
+			use the site.
+		</p>
+
+		<h2>Who we are</h2>
+		<p>
+			Cilo Media Studio is a marketing agency. We provide services that may
+			include influencer and social media marketing, cold outbound campaigns, SEO,
+			and conversion optimization.
+		</p>
+
+		<h2>Use of this website</h2>
+		<p>
+			You agree to use this website only for lawful purposes and not to misuse it,
+			interfere with its normal operation, attempt to gain unauthorized access to
+			it, or use it to infringe the rights of others.
+		</p>
+
+		<h2>Engaging our services</h2>
+		<p>
+			This website is for general information and to help you get in touch with
+			us. Any engagement of our services is governed by a separate written
+			agreement or statement of work between you and Cilo Media Studio, which will
+			set out the specific scope, deliverables, fees, and terms. Nothing on this
+			website is an offer or a guarantee of any particular result.
+		</p>
+
+		<h2>Intellectual property</h2>
+		<p>
+			The content on this website — including text, graphics, logos, and the Cilo
+			Media Studio name — is owned by or licensed to us and is protected by
+			applicable intellectual property laws. You may not copy, reproduce, or
+			distribute it without our permission. Content and materials owned by our
+			clients remain the property of those clients.
+		</p>
+
+		<h2>Third-party platforms</h2>
+		<p>
+			Our services often involve third-party platforms (such as Meta, Instagram,
+			and search engines). Your and our use of those platforms is also subject to
+			the platforms' own terms and policies. We are not responsible for the
+			availability, changes, or actions of those third-party platforms.
+		</p>
+
+		<h2>No guarantee of results; disclaimer</h2>
+		<p>
+			Marketing outcomes depend on many factors outside our control. While we work
+			hard to deliver strong results, we do not warrant or guarantee any specific
+			level of reach, engagement, ranking, leads, or revenue. This website and its
+			content are provided "as is" without warranties of any kind, to the fullest
+			extent permitted by law.
+		</p>
+
+		<h2>Limitation of liability</h2>
+		<p>
+			To the fullest extent permitted by law, Cilo Media Studio will not be liable
+			for any indirect, incidental, special, or consequential damages arising out
+			of or related to your use of this website.
+		</p>
+
+		<h2>Governing law</h2>
+		<p>
+			These Terms are governed by the laws of the State of California, without
+			regard to its conflict-of-laws rules.
+			<em>TODO: confirm the specific county/venue for any disputes.</em>
+		</p>
+
+		<h2>Changes to these Terms</h2>
+		<p>
+			We may update these Terms from time to time. When we do, we will revise the
+			"Last updated" date above and post the new version on this page.
+		</p>
+
+		<h2>Contact us</h2>
+		<p>
+			Questions about these Terms? Contact us:
+		</p>
+		<p>
+			{business.legalName}<br />
+			{business.address}<br />
+			Email: <a href={`mailto:${business.email}`}>{business.email}</a><br />
+			Phone: <a href={`tel:${business.phoneHref}`}>{business.phone}</a>
+		</p>
+	</TextSection>
+</Layout>

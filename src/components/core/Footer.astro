@@ -91,9 +91,10 @@ const { footerSocials, footerLists, copyrightName, background, color, showPlug: 
   }
   .footer-link__list li a {
     text-decoration: none;
+    transition: color linear 150ms;
   }
   .footer-link__list li a:hover {
-    opacity: 0.84;
+    color: var(--theme-accent);
   }
   .footer-copyright__container {
     display: flex;

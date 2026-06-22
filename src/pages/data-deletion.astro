@@ -1,0 +1,70 @@
+---
+import { TextSection } from '@components/odyssey-theme';
+import Layout from '../layouts/Page.astro';
+import settings from '../config/settings.js';
+
+const { business } = settings;
+const lastUpdated = 'June 20, 2026';
+
+const seo = {
+	title: 'Data Deletion | Cilo Media Studio',
+	description:
+		'How to request deletion of personal data held by Cilo Media Studio, including data accessed through the Instagram and Meta platform APIs.',
+};
+---
+
+<Layout seo={seo}>
+	<TextSection narrow>
+		<h1>Data Deletion Request</h1>
+		<p><em>Last updated: {lastUpdated}</em></p>
+
+		<p>
+			You can ask {business.legalName} to delete the personal data we hold about
+			you. This includes any data we accessed through the Instagram Graph API or
+			other Meta platform APIs while providing services on behalf of a client.
+		</p>
+
+		<h2>How to request deletion</h2>
+		<p>To request deletion of your data, email us at:</p>
+		<p>
+			<a href={`mailto:${business.email}`}>{business.email}</a>
+		</p>
+		<p>Please use the subject line <strong>"Data Deletion Request"</strong> and include:</p>
+		<ul>
+			<li>Your name.</li>
+			<li>
+				The email address and/or the Instagram or social media account handle the
+				request relates to.
+			</li>
+			<li>
+				Any detail that helps us identify the data (for example, the brand or
+				campaign it is connected to).
+			</li>
+		</ul>
+
+		<h2>What happens next</h2>
+		<p>
+			We will confirm we received your request, verify your identity, and delete
+			the relevant personal data within 30 days. We may need to keep certain
+			information where the law requires it (for example, for tax or accounting
+			purposes); if so, we will tell you what we are keeping and why. We will let
+			you know once your request has been completed.
+		</p>
+
+		<h2>Removing our app's access yourself</h2>
+		<p>
+			If we accessed your data through a connected Instagram or Facebook account,
+			you can also remove our app's access directly from your account settings:
+			open <strong>Settings &rarr; Apps and Websites</strong> on Facebook or
+			Instagram, find the relevant app, and remove it. You may also contact the
+			business whose campaign your data was connected to.
+		</p>
+
+		<h2>More information</h2>
+		<p>
+			For full details on how we collect, use, and retain data, see our
+			<a href="/privacy">Privacy Policy</a>. If you have any questions about this
+			process, contact us at <a href={`mailto:${business.email}`}>{business.email}</a>.
+		</p>
+	</TextSection>
+</Layout>

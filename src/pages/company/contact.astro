@@ -2,10 +2,14 @@
 import ContactForm from '../../components/forms/ContactForm.astro';
 import Layout from '../../layouts/Page.astro';
 import { Container } from '@components/odyssey-theme';
+import settings from '../../config/settings.js';
+
+const { business } = settings;
 
 const seo = {
-	title: 'Contact | Astro Odyssey Theme',
-	description: 'Contact Page',
+	title: 'Contact | Cilo Media Studio',
+	description:
+		'Get in touch with Cilo Media Studio — a Bay Area influencer and social media marketing agency.',
 };
 ---
 
@@ -15,17 +19,18 @@ const seo = {
 			<div class="contact-hero__text-section">
 				<h1>Contact Us</h1>
 				<p>
-					This is a contact form using Odyssey's form components to create a
-					contact form component. The contact form is setup to use Netlify's
-					form detection; however, it can easily be translated to other popular
-					form services such as Formspree, Getform, Formspark, etc.
+					Want to talk through a campaign, or just learn more about how we work?
+					Reach out and we'll get back to you.
 				</p>
-				<div>
+				<div class="contact-details">
 					<p>
-						<em><a href="tel:8008675309">(800) 867-5309</a></em> • <em
-							><a href="mailto:hello@odysseytheme.com">hello@ourcompany.com</a
-							></em
-						>
+						<strong>{business.legalName}</strong><br />
+						{business.address}
+					</p>
+					<p>
+						Contact: {business.pointOfContact}<br />
+						Phone: <a href={`tel:${business.phoneHref}`}>{business.phone}</a><br />
+						Email: <a href={`mailto:${business.email}`}>{business.email}</a>
 					</p>
 				</div>
 			</div>
@@ -51,6 +56,9 @@ const seo = {
 		justify-content: center;
 		background-color: var(--theme-surface-1);
 		border-radius: var(--theme-shape-radius);
+	}
+	.contact-details {
+		margin-top: 1rem;
 	}
 	.col-2__container {
 		display: flex;

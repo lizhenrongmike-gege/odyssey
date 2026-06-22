@@ -1,41 +1,38 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { Container, Button } from '@components/odyssey-theme';
-import settings from '../../../config/settings.js';
-import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
 ---
 
 <Container>
 	<section class="hero-section__section">
 		<div class="hero-section__text">
-				<h1>Welcome to Odyssey</h1>
-				<p>
-					A marketing website theme built with <a
-						href="https://astro.build"
-						target="_blank"
-						rel="noreferrer">Astro</a
-					> and carefully crafted for startups and businesses.
-				</p>
-				<div class="hero-btns__container">
-					<Button href="/theme/get-started" customIcon
-						>Get Started
-            <Fragment slot="icon">
-              <Icon name="ic:baseline-chevron-right"/>
-            </Fragment>
-            </Button
-					>
-					<Button href="/theme/style-guide" unelevated>Style Guide</Button>
-				</div>
-        {settings.enableThemeSwitcher && <ThemeSwitcher client:only/>}
+			<h1>Social-first marketing that turns attention into customers.</h1>
+			<p>
+				Cilo Media Studio is a Bay Area marketing agency specializing in
+				influencer and social media campaigns — connecting restaurants and
+				growing brands with the right audiences, and turning that reach into real
+				results.
+			</p>
+			<div class="hero-btns__container">
+				<Button href="/company/contact" customIcon
+					>Book a call
+					<Fragment slot="icon">
+						<Icon name="ic:baseline-chevron-right" />
+					</Fragment>
+				</Button>
+				<Button href="/#services" unelevated>Our services</Button>
+			</div>
 		</div>
 		<div class="hero-section__image">
-				<picture>
-					<img
-						src="/assets/images/home/classic-hero.jpg"
-						alt="Astro Odyssey"
-						id="home-hero-image"
-					/>
-				</picture>
+			<picture>
+				<img
+					src="/assets/images/cilo/hero.jpg"
+					alt="A beautifully plated dish served at a lively, candlelit restaurant table"
+					id="home-hero-image"
+					width="1600"
+					height="900"
+				/>
+			</picture>
 		</div>
 	</section>
 </Container>
@@ -47,22 +44,46 @@ import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		align-items: center;
-		gap: 1rem;
+		gap: 2rem;
 	}
 	.hero-section__text {
+		position: relative;
 		justify-self: center;
-		max-width: 25rem;
+		max-width: 30rem;
+		animation: hero-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+	/* keep the headline + copy above the glow */
+	.hero-section__text > * {
+		position: relative;
+		z-index: 1;
+	}
+	/* soft cobalt glow behind the headline */
+	.hero-section__text::before {
+		content: '';
+		position: absolute;
+		top: -2.5rem;
+		left: -3rem;
+		width: 115%;
+		height: 65%;
+		background: radial-gradient(
+			55% 60% at 30% 40%,
+			var(--theme-accent-soft),
+			transparent 70%
+		);
+		filter: blur(36px);
+		z-index: 0;
+		pointer-events: none;
 	}
 	.hero-btns__container {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		gap: 1rem;
-	}
-	.hero-btns__container {
-		margin-right: 1rem;
+		margin-top: 2rem;
 	}
 	.hero-section__image {
 		display: flex;
+		animation: hero-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
 	}
 	.hero-section__image img {
 		width: 100%;
@@ -70,6 +91,13 @@ import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
 		max-height: 80vh;
 		object-fit: cover;
 		border-radius: var(--theme-shape-radius);
+		box-shadow: 0 30px 60px -30px oklch(0.24 0.06 264 / 0.35);
+	}
+	@keyframes hero-rise {
+		from {
+			opacity: 0;
+			transform: translateY(1.5rem);
+		}
 	}
 	@media (max-width: 768px) {
 		.hero-section__section {
