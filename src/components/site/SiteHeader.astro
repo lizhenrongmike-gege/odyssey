@@ -1,0 +1,67 @@
+---
+const nav = [
+	{ label: 'About', href: '/about' },
+	{ label: 'Services', href: '/services' },
+	{ label: 'Work', href: '/work' },
+	{ label: 'Team', href: '/team' },
+	{ label: 'Contact', href: '/contact' },
+];
+---
+
+<header class="site-header">
+	<a class="wordmark" href="/">CILO MEDIA STUDIO</a>
+	<nav class="site-nav" aria-label="Primary">
+		<ul>
+			{nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+		</ul>
+		<a class="btn btn--primary" href="/contact">Book a Discovery Call</a>
+	</nav>
+</header>
+
+<style>
+	.site-header {
+		padding: clamp(0.75rem, 2vw, 1.5rem) clamp(1.25rem, 4vw, 3rem) 0;
+	}
+	.wordmark {
+		display: block;
+		font-family: var(--theme-font-family-sans);
+		font-weight: 800;
+		font-size: clamp(2rem, 8.7vw, 8.7rem);
+		line-height: 0.9;
+		letter-spacing: -0.04em;
+		text-transform: uppercase;
+		color: var(--theme-on-bg);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+	.site-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin-top: clamp(0.5rem, 1.5vw, 1rem);
+		padding-bottom: clamp(0.75rem, 2vw, 1.25rem);
+		border-bottom: 1px solid var(--theme-on-bg);
+	}
+	.site-nav ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: clamp(1rem, 3vw, 2.5rem);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.site-nav ul a {
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--theme-on-bg);
+		text-decoration: none;
+		transition: color var(--theme-transition);
+	}
+	.site-nav ul a:hover {
+		color: var(--theme-primary);
+	}
+</style>

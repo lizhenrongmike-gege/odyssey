@@ -1,0 +1,56 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const projects = await getCollection('projects');
+	return projects.map((project) => ({
+		params: { slug: project.slug },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const seo = {
+	title: `${project.data.title} — CILO MEDIA STUDIO`,
+	description: project.data.summary,
+};
+---
+
+<SiteLayout seo={seo}>
+	<section class="section--dark page-hero">
+		<div class="container">
+			<p class="page-hero__eyebrow">Selected Work / {project.data.category}</p>
+			<h1 class="page-hero__title">{project.data.title}</h1>
+		</div>
+	</section>
+
+	<div
+		class="project-media media-ph"
+		style={`background-image:url('/assets/images/cilo/work/${project.slug}.jpg')`}
+	></div>
+
+	<section class="section">
+		<div class="container project-body prose">
+			<Content />
+		</div>
+	</section>
+
+	<section class="section section--tight">
+		<div class="container">
+			<a class="arrow" href="/work"><span aria-hidden="true">←</span> All work</a>
+		</div>
+	</section>
+</SiteLayout>
+
+<style>
+	.project-media {
+		width: 100%;
+		aspect-ratio: 16 / 8;
+	}
+	.project-body {
+		max-width: 66ch;
+	}
+</style>

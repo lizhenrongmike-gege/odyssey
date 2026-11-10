@@ -1,0 +1,72 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const seo = {
+	title: 'Team — CILO MEDIA STUDIO',
+	description:
+		'Great brands are built by people who share the same vision. Meet the team behind CILO.',
+};
+
+// Placeholder members — replace with real people/photos (see ASSETS.md).
+const members = [1, 2, 3, 4];
+---
+
+<SiteLayout seo={seo}>
+	<section class="section--dark page-hero">
+		<div class="container">
+			<p class="page-hero__eyebrow">Team</p>
+			<h1 class="page-hero__title">The Team Behind Every Great Brand</h1>
+			<p class="page-hero__intro">
+				Great brands aren't built by one person. They're built by people who
+				share the same vision.
+			</p>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<div class="team-grid">
+				{
+					members.map((n) => (
+						<article class="member">
+							<div
+								class="member__media media-ph"
+								style={`background-image:url('/assets/images/cilo/team/member-${n}.jpg')`}
+							/>
+							<h2 class="member__name">Name</h2>
+							<p class="member__role muted">Role / Title</p>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</SiteLayout>
+
+<style>
+	.team-grid {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: clamp(1rem, 2.5vw, 2rem);
+	}
+	.member__media {
+		aspect-ratio: 4 / 5;
+		margin-bottom: 1rem;
+	}
+	.member__name {
+		font-family: var(--theme-font-family-serif);
+		font-weight: 500;
+		font-size: clamp(1.4rem, 2vw, 1.8rem);
+		margin: 0 0 0.15rem;
+	}
+	.member__role {
+		margin: 0;
+		font-size: 0.9rem;
+		color: color-mix(in oklab, var(--theme-on-bg) 60%, transparent);
+	}
+	@media (max-width: 900px) {
+		.team-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>

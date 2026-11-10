@@ -1,0 +1,66 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import settings from '../config/settings.js';
+
+const { business } = settings;
+
+const seo = {
+	title: 'Contact — CILO MEDIA STUDIO',
+	description:
+		'Tell us about your brand and where you want to go. Book a discovery call with CILO MEDIA STUDIO.',
+};
+---
+
+<SiteLayout seo={seo}>
+	<section class="section section--cobalt">
+		<div class="container split">
+			<div class="split__aside">
+				<h2 class="section__title">Ready to Grow with Clarity?</h2>
+				<p class="contact__lead">
+					Tell us about your brand and where you want to go. Let's build something
+					that matters.
+				</p>
+				<p class="contact__email">
+					Or email us at
+					<a href={`mailto:${business.email}`}>{business.email}</a>
+				</p>
+			</div>
+			<div class="split__body">
+				<form
+					class="contact-form"
+					name="Contact Form"
+					method="POST"
+					action={business.contactFormEndpoint}
+				>
+					<input type="hidden" name="_subject" value="New inquiry from cilomediastudio.com" />
+					<input type="hidden" name="_next" value={`${settings.url}/contact-thank-you`} />
+					<input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+					<label>Name<input type="text" name="name" required /></label>
+					<label>Email<input type="email" name="email" required /></label>
+					<label>Brand Name<input type="text" name="brand" /></label>
+					<label>Message / Project Details<textarea name="message" rows="5" required></textarea></label>
+					<button class="btn btn--onCobalt" type="submit">Book a Discovery Call</button>
+				</form>
+			</div>
+		</div>
+	</section>
+</SiteLayout>
+
+<style>
+	.section--cobalt .split__aside .section__title {
+		position: static;
+	}
+	.contact__lead {
+		max-width: 34ch;
+		margin-top: 1rem;
+		color: rgba(255, 255, 255, 0.85);
+	}
+	.contact__email {
+		margin-top: 1.5rem;
+		font-size: 0.95rem;
+		color: rgba(255, 255, 255, 0.85);
+	}
+	.contact__email a {
+		color: #fff;
+	}
+</style>

@@ -1,0 +1,18 @@
+---
+import Base from './Base.astro';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import type { Props as BaseHeadProps } from '../components/head/BaseHead.astro';
+
+export interface Props {
+	seo?: BaseHeadProps;
+}
+
+const { seo } = Astro.props as Props;
+---
+
+<Base seo={seo}>
+	<SiteHeader slot="header" />
+	<slot />
+	<SiteFooter slot="footer" />
+</Base>

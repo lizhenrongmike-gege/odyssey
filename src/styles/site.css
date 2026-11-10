@@ -1,0 +1,180 @@
+/* ============================================================
+   Shared design system for the redesigned multi-page site.
+   Crisp (no rounded corners), sharp/elegant, high-contrast.
+   ============================================================ */
+
+.container {
+	width: 100%;
+	max-width: 1360px;
+	margin: 0 auto;
+	padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+/* ---------- Buttons (all square) ---------- */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.85rem 1.6rem;
+	border-radius: 0;
+	font-family: var(--theme-font-family-sans);
+	font-weight: 600;
+	font-size: 0.82rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	text-decoration: none;
+	border: 1.5px solid transparent;
+	cursor: pointer;
+	transition: background-color var(--theme-transition), color var(--theme-transition),
+		border-color var(--theme-transition);
+}
+.btn--primary { background: var(--theme-primary); color: #fff; }
+.btn--primary:hover { background: var(--theme-on-bg); }
+.btn--ghost { background: transparent; color: #fff; border-color: #fff; }
+.btn--ghost:hover { background: #fff; color: var(--theme-on-bg); }
+.btn--onCobalt { background: #fff; color: var(--theme-primary); }
+.btn--onCobalt:hover { background: var(--theme-on-bg); color: #fff; }
+.btn--dark { background: var(--theme-on-bg); color: #fff; }
+.btn--dark:hover { background: var(--theme-primary); }
+
+/* ---------- Sections ---------- */
+.section { padding: clamp(4rem, 10vw, 9rem) 0; }
+.section--tight { padding-bottom: 0; }
+.section--cobalt { background: var(--theme-primary); color: #fff; }
+.section--dark { background: #0e0f13; color: #fff; }
+.section__title {
+	font-size: clamp(2.2rem, 5vw, 4rem);
+	margin: 0 0 2rem;
+	text-wrap: balance;
+}
+
+/* ---------- Split (heading | body) ---------- */
+.split {
+	display: grid;
+	grid-template-columns: 1fr 1.5fr;
+	gap: clamp(1.5rem, 5vw, 4rem);
+	align-items: start;
+}
+.split__aside .section__title { position: sticky; top: 2rem; margin: 0; }
+.section--cobalt .split__aside .section__title,
+.section--dark .split__aside .section__title { position: static; }
+.prose p { margin: 0 0 1.2rem; max-width: 60ch; }
+.prose .lead {
+	font-family: var(--theme-font-family-serif);
+	font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+	font-weight: 500;
+	line-height: 1.2;
+	margin-bottom: 1.75rem;
+}
+
+/* ---------- Arrow text-link ---------- */
+.arrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	width: fit-content;
+	font-size: 0.82rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: inherit;
+	text-decoration: none;
+	border-bottom: 1.5px solid currentColor;
+	padding-bottom: 0.25rem;
+}
+.arrow span { display: inline-block; transition: transform var(--theme-transition); }
+.arrow:hover span { transform: translateX(0.35rem); }
+
+/* ---------- Image placeholder ----------
+   A labeled placeholder image is dropped at each referenced path (see
+   IMAGE-MAP.md). Pages set the image via inline `background-image`; replace the
+   file at the same path to swap it in — no code change needed. When no
+   `data-label` and no image are present the ::after simply renders empty. */
+.media-ph {
+	background-color: #14161d;
+	background-size: cover;
+	background-position: center;
+	display: grid;
+	place-items: center;
+	color: #fff;
+}
+.media-ph::after {
+	content: attr(data-label);
+	font-size: 0.7rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.4);
+}
+
+/* ---------- Tag list ---------- */
+.taglist {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 1rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 0.78rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+.taglist li::after { content: '/'; margin-left: 1rem; opacity: 0.5; }
+.taglist li:last-child::after { content: ''; }
+
+/* ---------- Contact form (dark/cobalt backgrounds) ---------- */
+.contact-form { display: grid; gap: 1.1rem; }
+.contact-form label {
+	display: grid;
+	gap: 0.45rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+.contact-form input,
+.contact-form textarea {
+	font: inherit;
+	text-transform: none;
+	letter-spacing: normal;
+	font-weight: 400;
+	padding: 0.8rem 0.9rem;
+	border-radius: 0;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	background: rgba(255, 255, 255, 0.08);
+	color: #fff;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+	outline: none;
+	border-color: #fff;
+	background: rgba(255, 255, 255, 0.14);
+}
+.contact-form .btn { margin-top: 0.5rem; justify-self: start; }
+.hp { display: none; }
+
+/* ---------- Subpage hero ---------- */
+.page-hero { padding: clamp(4rem, 12vw, 10rem) 0 clamp(3rem, 7vw, 6rem); }
+.page-hero__eyebrow {
+	font-size: 0.8rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	opacity: 0.7;
+	margin: 0 0 1.5rem;
+}
+.page-hero__title {
+	font-size: clamp(2.8rem, 8vw, 7rem);
+	line-height: 0.98;
+	margin: 0;
+	text-wrap: balance;
+}
+.page-hero__intro {
+	max-width: 52ch;
+	margin-top: 1.5rem;
+	font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+	opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+	.split { grid-template-columns: 1fr; }
+	.split__aside .section__title { position: static; }
+}

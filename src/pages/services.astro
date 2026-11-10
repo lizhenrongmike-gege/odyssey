@@ -1,0 +1,117 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const seo = {
+	title: 'Services — CILO MEDIA STUDIO',
+	description:
+		'Build, Create, Grow — brand strategy, content production, and marketing that turns strategy into momentum.',
+};
+
+const services = [
+	{
+		name: 'Build',
+		slug: 'build',
+		subtitle: 'Build a strong foundation.',
+		body: 'We define who you are and how you show up — the strategy, positioning, and creative direction everything else is built on.',
+		tags: ['Brand Strategy', 'Positioning', 'Messaging', 'Creative Direction'],
+	},
+	{
+		name: 'Create',
+		slug: 'create',
+		subtitle: 'Bring ideas to life.',
+		body: 'We bring the brand to life — photography, video, and content produced to work across every channel.',
+		tags: ['Photography', 'Videography', 'Content Production', 'Creative Assets'],
+	},
+	{
+		name: 'Grow',
+		slug: 'grow',
+		subtitle: 'Turn strategy into momentum.',
+		body: 'We turn the foundation into momentum with marketing, SEO, campaigns, social, and creator partnerships.',
+		tags: ['Marketing', 'SEO', 'Campaigns', 'Social Media', 'Creator Partnerships'],
+	},
+];
+---
+
+<SiteLayout seo={seo}>
+	<section class="section--dark page-hero">
+		<div class="container">
+			<p class="page-hero__eyebrow">Services</p>
+			<h1 class="page-hero__title">Build. Create. Grow.</h1>
+			<p class="page-hero__intro">
+				Three ways we help brands move forward — foundation, production, and
+				momentum.
+			</p>
+		</div>
+	</section>
+
+	{
+		services.map((s, i) => (
+			<section class={`section service-row ${i % 2 === 1 ? 'service-row--rev' : ''}`} id={s.slug}>
+				<div class="container service-row__grid">
+					<div
+						class="service-row__media media-ph"
+						style={`background-image:url('/assets/images/cilo/services/${s.slug}.jpg')`}
+					/>
+					<div class="service-row__body">
+						<h2 class="section__title">{s.name}</h2>
+						<p class="lead">{s.subtitle}</p>
+						<p class="service-row__desc">{s.body}</p>
+						<ul class="taglist">
+							{s.tags.map((t) => <li>{t}</li>)}
+						</ul>
+					</div>
+				</div>
+			</section>
+		))
+	}
+
+	<section class="section section--cobalt cta">
+		<div class="container cta__inner">
+			<h2 class="section__title">Not sure where to start?</h2>
+			<a class="btn btn--onCobalt" href="/contact">Book a Discovery Call</a>
+		</div>
+	</section>
+</SiteLayout>
+
+<style>
+	.service-row {
+		scroll-margin-top: 1.5rem;
+	}
+	.service-row__grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: clamp(1.5rem, 5vw, 4rem);
+		align-items: center;
+	}
+	.service-row--rev .service-row__media {
+		order: 2;
+	}
+	.service-row__media {
+		aspect-ratio: 4 / 3;
+		height: 100%;
+		min-height: 320px;
+	}
+	.service-row__desc {
+		max-width: 46ch;
+		margin-bottom: 1.5rem;
+	}
+	.service-row .taglist {
+		color: color-mix(in oklab, var(--theme-on-bg) 65%, transparent);
+	}
+	.cta__inner {
+		text-align: center;
+		max-width: 44ch;
+		margin-inline: auto;
+	}
+	.cta__inner .section__title {
+		margin-bottom: 2rem;
+	}
+	@media (max-width: 900px) {
+		.service-row__grid {
+			grid-template-columns: 1fr;
+		}
+		.service-row--rev .service-row__media {
+			order: 0;
+		}
+	}
+</style>

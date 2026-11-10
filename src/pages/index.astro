@@ -1,96 +1,499 @@
 ---
-import { Container, Button, CtaCardSection } from '@components/odyssey-theme';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { getCollection } from 'astro:content';
 
-import Layout from '../layouts/Page.astro';
-import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
+const seo = {
+	title: 'CILO MEDIA STUDIO — Helping Brands Grow with Clarity',
+	description:
+		'CILO MEDIA STUDIO is a brand and marketing studio helping ambitious brands grow with clarity — strategy, content, and growth.',
+};
 
 const services = [
 	{
-		title: 'Influencer & Social Media Marketing',
-		body: 'We build creator partnerships and social campaigns that put your brand in front of the audiences most likely to buy — from food influencers to niche B2B voices.',
+		name: 'Build',
+		slug: 'build',
+		subtitle: 'Build a strong foundation.',
+		tags: ['Brand Strategy', 'Positioning', 'Messaging', 'Creative Direction'],
 	},
 	{
-		title: 'Cold Outbound Campaigns',
-		body: 'Targeted outreach that finds new customers and partners and starts real conversations at scale.',
+		name: 'Create',
+		slug: 'create',
+		subtitle: 'Bring ideas to life.',
+		tags: ['Photography', 'Videography', 'Content Production', 'Creative Assets'],
 	},
 	{
-		title: 'SEO & Optimization',
-		body: 'We sharpen your discoverability and conversion so the traffic you earn actually turns into business.',
+		name: 'Grow',
+		slug: 'grow',
+		subtitle: 'Turn strategy into momentum.',
+		tags: ['Marketing', 'SEO', 'Campaigns', 'Social Media', 'Creator Partnerships'],
 	},
 ];
+
+const projects = (await getCollection('projects')).sort(
+	(a, b) => a.data.order - b.data.order
+);
 ---
 
-<Layout>
-	<HomeHeroSection />
-
-	<Container>
-		<section id="services" class="services__section">
-			<div class="services__intro">
-				<h2>What we do</h2>
-				<p>
-					Cilo Media Studio is a social-first marketing agency. We help
-					restaurants and growing brands reach the right people — and turn that
-					attention into real, measurable business.
-				</p>
+<SiteLayout seo={seo}>
+	<!-- ============ HERO (full-bleed) ============ -->
+	<section class="hero" id="top">
+		<video
+			class="hero__bg"
+			autoplay
+			muted
+			loop
+			playsinline
+			poster="/assets/images/cilo/hero/hero-poster.jpg"
+		>
+			<source src="/assets/images/cilo/hero/hero-reel.mp4" type="video/mp4" />
+		</video>
+		<div class="hero__scrim"></div>
+		<div class="hero__inner">
+			<h1 class="hero__headline">Helping Brands Grow with Clarity.</h1>
+			<p class="hero__sub">
+				Strategy. Content. Growth. Thoughtful marketing for brands ready to scale.
+			</p>
+			<div class="hero__cta">
+				<a class="btn btn--primary" href="/contact">Book a Discovery Call</a>
+				<a class="btn btn--ghost" href="/work">View Our Work</a>
 			</div>
-			<div class="services__grid">
+		</div>
+	</section>
+
+	<!-- ============ WHY CILO ============ -->
+	<section class="section" id="about">
+		<div class="container split">
+			<div class="split__aside">
+				<h2 class="section__title">Why CILO</h2>
+			</div>
+			<div class="split__body prose">
+				<p class="lead">
+					We partner with ambitious brands ready for their next stage of growth.
+				</p>
+				<p>
+					Growth doesn't happen by accident. It happens when a brand has a clear
+					identity, a compelling story, and the right strategy to connect with the
+					people who matter.
+				</p>
+				<p>
+					At CILO, we help businesses define who they are, communicate what makes
+					them different, and turn thoughtful marketing into long-term brand
+					growth.
+				</p>
+				<a class="arrow" href="/about">More about us <span aria-hidden="true">→</span></a>
+			</div>
+		</div>
+	</section>
+
+	<!-- ============ SERVICES (three full-height clickable panels) ============ -->
+	<section class="services" id="services" aria-label="Services">
+		{
+			services.map((s) => (
+				<a class="panel" href={`/services#${s.slug}`}>
+					<div
+						class="panel__media media-ph"
+						style={`background-image:url('/assets/images/cilo/services/${s.slug}.jpg')`}
+					/>
+					<div class="panel__content">
+						<h3 class="panel__name">{s.name}</h3>
+						<p class="panel__subtitle">{s.subtitle}</p>
+						<ul class="taglist">
+							{s.tags.map((t) => <li>{t}</li>)}
+						</ul>
+						<span class="arrow">Explore <span aria-hidden="true">→</span></span>
+					</div>
+				</a>
+			))
+		}
+	</section>
+
+	<!-- ============ SELECTED WORK (pinned scroll) ============ -->
+	<section class="work" id="work">
+		<div class="work__grid">
+			<div class="work__aside">
+				<h2 class="section__title">Selected Work</h2>
+			</div>
+			<div class="work__stack">
 				{
-					services.map((service) => (
-						<article class="service-card">
-							<h3>{service.title}</h3>
-							<p>{service.body}</p>
-						</article>
+					projects.map((p) => (
+						<a class="work__item" href={`/work/${p.slug}`}>
+							<div
+								class="work__media media-ph"
+								style={`background-image:url('/assets/images/cilo/work/${p.slug}.jpg')`}
+							/>
+							<div class="work__meta">
+								<h3 class="work__name">
+									{p.data.title} <span class="work__cat">— {p.data.category}</span>
+								</h3>
+								<p class="work__overview">
+									{p.data.summary} <em>(Case content pending)</em>
+								</p>
+							</div>
+						</a>
 					))
 				}
 			</div>
-		</section>
-	</Container>
+		</div>
+		<div class="container logobar">
+			<p class="logobar__label">Brands we've worked with</p>
+			<div class="logobar__grid">
+				{[1, 2, 3, 4, 5, 6].map((n) => (
+					<div
+						class="logo-ph"
+						style={`background-image:url('/assets/images/cilo/logos/logo-${n}.png')`}
+					/>
+				))}
+			</div>
+		</div>
+	</section>
 
-	<CtaCardSection>
-		<h2>Ready to grow? Let's talk.</h2>
-		<p>
-			Tell us about your brand and who you're trying to reach. We'll show you how
-			a social-first campaign can get you there.
-		</p>
-		<Button href="/company/contact">Book a call</Button>
-	</CtaCardSection>
-</Layout>
+	<!-- ============ TEAM (teaser) ============ -->
+	<section class="section section--tight" id="team">
+		<div class="container">
+			<div class="team__head">
+				<h2 class="section__title">The Team Behind CILO</h2>
+				<p class="team__statement">
+					Great brands aren't built by one person. They're built by people who
+					share the same vision.
+				</p>
+				<a class="arrow" href="/team">Meet the team <span aria-hidden="true">→</span></a>
+			</div>
+		</div>
+		<div
+			class="team__media media-ph"
+			style="background-image:url('/assets/images/cilo/team/team-band.jpg')"
+		></div>
+	</section>
+
+	<!-- ============ TESTIMONIALS ============ -->
+	<section class="section" id="testimonials">
+		<div class="container">
+			<h2 class="section__title">Client Experiences</h2>
+			<div class="quotes">
+				{
+					[1, 2, 3].map((n) => (
+						<figure class="quote">
+							<blockquote>
+								“Testimonial {n} pending — real client quote goes here.”
+							</blockquote>
+							<figcaption>
+								<span class="quote__name">Client Name</span>
+								<span class="quote__brand">Brand / Title</span>
+							</figcaption>
+						</figure>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- ============ CONTACT CTA (links to /contact) ============ -->
+	<section class="section section--cobalt cta">
+		<div class="container cta__inner">
+			<h2 class="section__title cta__title">Ready to Grow with Clarity?</h2>
+			<p class="cta__lead">
+				Tell us about your brand and where you want to go. Let's build something
+				that matters.
+			</p>
+			<a class="btn btn--onCobalt" href="/contact">Book a Discovery Call</a>
+		</div>
+	</section>
+</SiteLayout>
 
 <style>
-	.services__section {
-		margin: var(--section-margin) auto;
-		scroll-margin-top: 2rem;
+	/* ---------- hero (full-bleed, full-height) ---------- */
+	.hero {
+		position: relative;
+		width: 100%;
+		min-height: clamp(560px, 90vh, 1080px);
+		display: flex;
+		align-items: flex-end;
+		overflow: hidden;
 	}
-	.services__intro {
-		max-width: var(--container-max-width-narrow);
-		margin: 0 auto 2rem auto;
-		text-align: center;
+	.hero__bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
-	.services__grid {
+	.hero__scrim {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(5, 7, 15, 0.25) 0%, rgba(5, 7, 15, 0.78) 100%);
+	}
+	.hero__inner {
+		position: relative;
+		width: 100%;
+		max-width: 1360px;
+		margin: 0 auto;
+		padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 4vw, 3rem);
+		color: #fff;
+	}
+	.hero__headline {
+		font-family: var(--theme-font-family-serif);
+		font-weight: 500;
+		font-size: clamp(2.8rem, 7vw, 6rem);
+		line-height: 1;
+		letter-spacing: -0.01em;
+		text-wrap: balance;
+		max-width: 16ch;
+		margin: 0 0 1.25rem;
+	}
+	.hero__sub {
+		font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+		max-width: 46ch;
+		margin: 0 0 2rem;
+		color: rgba(255, 255, 255, 0.86);
+	}
+	.hero__cta {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.hero__cta .btn + .btn {
+		margin-left: -1.5px;
+	}
+
+	/* ---------- SERVICES: three full-height panels ---------- */
+	.services {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: var(--theme-grid-gap);
+		min-height: 100vh;
 	}
-	.service-card {
-		padding: 2rem;
-		background-color: var(--theme-surface-1);
-		color: var(--theme-on-surface-1);
-		border: 1px solid oklch(0.9 0.01 264);
-		border-radius: var(--theme-shape-radius);
-		transition: transform var(--theme-transition),
-			box-shadow var(--theme-transition), border-color var(--theme-transition);
+	.panel {
+		position: relative;
+		display: flex;
+		align-items: flex-end;
+		min-height: 100vh;
+		color: #fff;
+		text-decoration: none;
+		overflow: hidden;
+		border-right: 1px solid rgba(255, 255, 255, 0.16);
 	}
-	.service-card:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 22px 40px -28px oklch(0.24 0.06 264 / 0.4);
-		border-color: var(--theme-accent);
+	.panel:last-child {
+		border-right: 0;
 	}
-	.service-card h3 {
+	.panel__media {
+		position: absolute;
+		inset: 0;
+	}
+	.panel__media::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.72));
+		transition: background var(--theme-transition);
+	}
+	.panel:hover .panel__media::before {
+		background: linear-gradient(
+			180deg,
+			color-mix(in oklab, var(--theme-primary) 30%, transparent),
+			color-mix(in oklab, var(--theme-primary) 85%, black)
+		);
+	}
+	.panel__content {
+		position: relative;
+		padding: clamp(1.5rem, 3vw, 2.5rem);
+	}
+	.panel__name {
+		font-family: var(--theme-font-family-serif);
+		font-weight: 500;
+		font-size: clamp(2rem, 3.5vw, 3rem);
+		margin: 0 0 0.35rem;
+	}
+	.panel__subtitle {
+		margin: 0 0 1.25rem;
+		color: rgba(255, 255, 255, 0.82);
+	}
+	.panel .taglist {
+		color: rgba(255, 255, 255, 0.72);
+		margin-bottom: 1.5rem;
+	}
+	.panel .arrow {
 		margin-top: 0;
 	}
-	@media (max-width: 768px) {
-		.services__grid {
+
+	/* ---------- SELECTED WORK: pinned scroll ---------- */
+	.work {
+		padding: clamp(4rem, 10vw, 9rem) 0 0;
+	}
+	.work__grid {
+		display: grid;
+		grid-template-columns: 38fr 62fr;
+	}
+	.work__aside .section__title {
+		position: sticky;
+		top: 0;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		margin: 0;
+		padding: 0 clamp(1.25rem, 4vw, 3rem);
+	}
+	.work__item {
+		position: relative;
+		display: flex;
+		align-items: flex-end;
+		min-height: 100vh;
+		color: #fff;
+		text-decoration: none;
+	}
+	.work__media {
+		position: absolute;
+		inset: 0;
+	}
+	.work__media::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.72));
+	}
+	.work__meta {
+		position: relative;
+		padding: clamp(1.5rem, 4vw, 3rem);
+		max-width: 40ch;
+	}
+	.work__name {
+		font-family: var(--theme-font-family-serif);
+		font-weight: 500;
+		font-size: clamp(1.8rem, 3vw, 2.6rem);
+		margin: 0 0 0.5rem;
+	}
+	.work__cat {
+		color: rgba(255, 255, 255, 0.7);
+	}
+	.work__overview {
+		margin: 0;
+		color: rgba(255, 255, 255, 0.82);
+	}
+	.work__overview em {
+		color: rgba(255, 255, 255, 0.55);
+	}
+	.logobar {
+		padding-top: clamp(3rem, 7vw, 6rem);
+	}
+	.logobar__label {
+		font-size: 0.8rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: color-mix(in oklab, var(--theme-on-bg) 60%, transparent);
+		margin-bottom: 1.5rem;
+	}
+	.logobar__grid {
+		display: grid;
+		grid-template-columns: repeat(6, 1fr);
+		gap: 1px;
+		background: color-mix(in oklab, var(--theme-on-bg) 12%, transparent);
+		border: 1px solid color-mix(in oklab, var(--theme-on-bg) 12%, transparent);
+	}
+	.logo-ph {
+		aspect-ratio: 3 / 1.4;
+		background-color: var(--theme-bg);
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-origin: content-box;
+		padding: clamp(0.75rem, 1.5vw, 1.25rem);
+		display: grid;
+		place-items: center;
+	}
+	.logo-ph::after {
+		content: attr(data-label);
+		font-size: 0.7rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: color-mix(in oklab, var(--theme-on-bg) 40%, transparent);
+	}
+
+	/* ---------- TEAM ---------- */
+	.team__statement {
+		font-family: var(--theme-font-family-serif);
+		font-weight: 500;
+		font-size: clamp(1.3rem, 2.2vw, 2rem);
+		line-height: 1.25;
+		max-width: 30ch;
+		margin-bottom: 1.5rem;
+	}
+	.team__media {
+		width: 100%;
+		aspect-ratio: 16 / 7;
+		margin-top: clamp(2.5rem, 6vw, 5rem);
+	}
+
+	/* ---------- TESTIMONIALS ---------- */
+	.quotes {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1px;
+		background: color-mix(in oklab, var(--theme-on-bg) 14%, transparent);
+		border-block: 1px solid color-mix(in oklab, var(--theme-on-bg) 14%, transparent);
+	}
+	.quote {
+		margin: 0;
+		padding: clamp(1.5rem, 3vw, 2.5rem);
+		background: var(--theme-bg);
+	}
+	.quote blockquote {
+		font-family: var(--theme-font-family-serif);
+		font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+		line-height: 1.35;
+		margin: 0 0 1.5rem;
+		padding: 0;
+		border: 0;
+	}
+	.quote figcaption {
+		display: flex;
+		flex-direction: column;
+		font-size: 0.9rem;
+	}
+	.quote__name {
+		font-weight: 600;
+	}
+	.quote__brand {
+		color: color-mix(in oklab, var(--theme-on-bg) 60%, transparent);
+	}
+
+	/* ---------- CONTACT CTA ---------- */
+	.cta__inner {
+		text-align: center;
+		max-width: 44ch;
+		margin-inline: auto;
+	}
+	.cta__title {
+		margin-bottom: 1rem;
+	}
+	.cta__lead {
+		margin: 0 auto 2rem;
+		color: rgba(255, 255, 255, 0.85);
+	}
+
+	/* ---------- responsive ---------- */
+	@media (max-width: 900px) {
+		.services {
 			grid-template-columns: 1fr;
+			min-height: 0;
+		}
+		.panel {
+			min-height: 78vh;
+			border-right: 0;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+		}
+		.work__grid {
+			grid-template-columns: 1fr;
+		}
+		.work__aside .section__title {
+			position: static;
+			min-height: 0;
+			padding: 0 clamp(1.25rem, 4vw, 3rem) 2rem;
+		}
+		.work__item {
+			min-height: 72vh;
+		}
+		.quotes {
+			grid-template-columns: 1fr;
+		}
+		.logobar__grid {
+			grid-template-columns: repeat(3, 1fr);
 		}
 	}
 </style>

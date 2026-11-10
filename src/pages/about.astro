@@ -1,0 +1,72 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const seo = {
+	title: 'About — CILO MEDIA STUDIO',
+	description:
+		'CILO MEDIA STUDIO partners with ambitious brands ready for their next stage of growth — strategy, content, and growth, with clarity.',
+};
+---
+
+<SiteLayout seo={seo}>
+	<section class="section--dark page-hero">
+		<div class="container">
+			<p class="page-hero__eyebrow">About</p>
+			<h1 class="page-hero__title">Marketing with clarity, built for growth.</h1>
+			<p class="page-hero__intro">
+				We partner with ambitious brands ready for their next stage of growth.
+			</p>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container split">
+			<div class="split__aside">
+				<h2 class="section__title">Why CILO</h2>
+			</div>
+			<div class="split__body prose">
+				<p class="lead">
+					Growth doesn't happen by accident. It happens when a brand has a clear
+					identity, a compelling story, and the right strategy.
+				</p>
+				<p>
+					At CILO, we help businesses define who they are, communicate what makes
+					them different, and turn thoughtful marketing into long-term brand
+					growth.
+				</p>
+				<p>
+					Whether you're launching something new, entering your next stage of
+					growth, or redefining your brand, we're here to help you move
+					forward—with clarity.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<div
+		class="about-band media-ph"
+		style="background-image:url('/assets/images/cilo/about/about-band.jpg')"
+	></div>
+
+	<section class="section section--cobalt cta">
+		<div class="container cta__inner">
+			<h2 class="section__title">Let's build something that matters.</h2>
+			<a class="btn btn--onCobalt" href="/contact">Book a Discovery Call</a>
+		</div>
+	</section>
+</SiteLayout>
+
+<style>
+	.about-band {
+		width: 100%;
+		aspect-ratio: 16 / 7;
+	}
+	.cta__inner {
+		text-align: center;
+		max-width: 44ch;
+		margin-inline: auto;
+	}
+	.cta__inner .section__title {
+		margin-bottom: 2rem;
+	}
+</style>

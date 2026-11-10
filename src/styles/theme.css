@@ -20,8 +20,8 @@
 
 	/* ===== Theme Shapes ===== */
 	/* Set this to 0 if you want all of the rounded cards, images, etc to be straight edges */
-	--theme-shape-radius: clamp(1rem, 2rem, 3rem);
-	--theme-button-border-radius: 3rem;
+	--theme-shape-radius: 0;
+	--theme-button-border-radius: 0;
 
 	/* ===== Theme Transition ===== */
 	--theme-transition: 0.2s ease-in-out;
@@ -37,7 +37,7 @@
 
 	/* ===== Theme Fonts ===== */
 	/* Headings + logo use the display face; body uses the text face. */
-	--theme-font-family-serif: 'Clash Display', Georgia, 'Times New Roman', serif;
-	--theme-font-family-sans: 'General Sans', -apple-system, BlinkMacSystemFont,
-		'Segoe UI', Roboto, sans-serif;
+	--theme-font-family-serif: 'Bodoni Moda', Georgia, 'Times New Roman', serif;
+	--theme-font-family-sans: 'Neue Haas Grotesk Text', 'Helvetica Neue', Arial,
+		sans-serif;
 }
